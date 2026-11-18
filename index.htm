@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <title>JAIGOPAL GARODIA | Cloud Attendance</title>
+  <style>
+  :root{--ink:#18213b;--muted:#68758e;--card:#fff;--line:#e6eafa;--purple:#7254ed;--blue:#2874ef;--pink:#ed4f9d;--teal:#0ea5a6;--green:#099969}
+  *{box-sizing:border-box}
+  body{margin:0;color:var(--ink);font:15px/1.5 system-ui,-apple-system,'Segoe UI',Arial,sans-serif;background:radial-gradient(circle at 8% 7%,#e6dcff 0,transparent 32%),radial-gradient(circle at 89% 24%,#d8f4ff 0,transparent 31%),#f6f8ff}
+  .wrap{width:min(1140px,calc(100% - 32px));margin:auto}
+  header{position:relative;overflow:hidden;padding:34px 0 76px;color:#fff;background:linear-gradient(115deg,#4531a7 0%,#5e54d9 37%,#1973d3 75%,#20b7c2 100%)}
+  header:before,header:after{content:'';position:absolute;pointer-events:none;width:420px;height:420px;border-radius:50%;border:60px solid #ffffff14}
+  header:before{top:-300px;right:-45px}header:after{bottom:-370px;left:15%}
+  .hero{display:flex;align-items:center;gap:18px;position:relative;z-index:1}
+  .brandmark{width:56px;height:56px;border-radius:18px;background:#ffffff29;display:grid;place-items:center;border:1px solid #ffffff55;box-shadow:inset 0 2px 8px #ffffff25;flex:none}
+  .brandmark svg{height:30px;width:30px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  h1{font-size:clamp(21px,3vw,31px);line-height:1.2;margin:3px 0 6px;letter-spacing:-.7px}
+  header p{margin:0;color:#e6f2ff;font-size:14px}
+  .eyebrow{display:inline-block;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:800;color:#e1e5ff}
+  main{padding:0 0 55px;position:relative;z-index:2;margin-top:-43px!important}
+  .panel{background:#fff;border:1px solid #e9e9fa;border-radius:21px;box-shadow:0 10px 38px #483b9820;padding:24px;margin-bottom:20px}
+  .connect-panel{border-top:5px solid #8c69ff}
+  .sectionhead{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:18px}
+  h2{font-size:18px;letter-spacing:-.35px;margin:0;color:#1c2441}
+  .settings{display:grid;grid-template-columns:2fr 1fr 1fr;gap:12px}
+  .field{min-width:0}.field label{display:block;color:#596780;font-size:12px;font-weight:750;margin-bottom:7px}
+  input{height:45px;border:1px solid #d7ddef;border-radius:12px;padding:0 13px;font:inherit;width:100%;background:#fafdff;color:#172344;transition:.2s border,.2s box-shadow}
+  input:focus{outline:none;border-color:#866af0;box-shadow:0 0 0 4px #8f70f01b}
+  .actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:16px}
+  button{font:inherit;border:0;border-radius:12px;padding:12px 18px;cursor:pointer;background:linear-gradient(105deg,#674ce6,#2478f0);color:#fff;font-weight:750;box-shadow:0 5px 15px #605bf32e;transition:transform .16s,box-shadow .16s}
+  button:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 8px 18px #605bf34b}
+  button.secondary{background:#f0efff;color:#5a48c6;box-shadow:none}
+  button:disabled{opacity:.45;cursor:not-allowed}
+  .status{display:inline-flex;align-items:center;gap:8px;border-radius:100px;font-size:12px;font-weight:800;padding:8px 12px;background:#fff0f0;color:#bc3f58;white-space:normal}
+  .status:before{content:'';width:8px;height:8px;flex:none;background:currentColor;border-radius:50%}
+  .status.ok{background:#ddfbef;color:#067d51}
+  .hint,.footnote{font-size:12px;color:#71809b;line-height:1.65}.hint{margin:15px 0 0}
+  .device-tag{margin-left:auto;display:flex;align-items:center;gap:7px;font-size:12px;color:#677796;font-weight:700}
+  .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px;margin-bottom:20px}
+  .stat{min-width:0;position:relative;overflow:hidden;padding:23px 23px 25px;border-radius:20px;color:#fff;box-shadow:0 10px 25px #414e9c26}
+  .stat:nth-child(1){background:linear-gradient(125deg,#7354f2,#a05bf0)}
+  .stat:nth-child(2){background:linear-gradient(125deg,#00a785,#31c5a2)}
+  .stat:nth-child(3){background:linear-gradient(125deg,#f17b40,#fa4e8e)}
+  .stat:after{content:'';position:absolute;right:-34px;bottom:-55px;width:145px;height:145px;border:25px solid #ffffff27;border-radius:50%}
+  .stat small{display:block;color:#fff;font-size:13px;font-weight:650;opacity:.95}
+  .stat strong{display:block;font-size:46px;line-height:1.15;font-weight:850;letter-spacing:-1.3px;margin-top:12px}
+  .stat .symbol{display:grid;place-items:center;width:40px;height:40px;background:#ffffff30;border:1px solid #ffffff40;border-radius:12px;margin-bottom:13px;font-size:20px}
+  .stat .micro{font-size:11px;color:#ffffffdd;margin-top:8px;display:block}
+  .attendance-summary{display:flex;align-items:center;justify-content:space-between;gap:14px;margin:-1px 0 17px;font-size:12px;color:#67758d;flex-wrap:wrap}
+  .track{height:8px;border-radius:20px;background:#e9ecf8;overflow:hidden;margin-bottom:14px}
+  .fill{height:100%;width:0;background:linear-gradient(90deg,#09b6aa,#8f5beb);border-radius:20px;transition:width .25s ease}
+  .date-control{display:flex;align-items:center;gap:9px;flex-wrap:wrap}.date-control label{font-size:12px;font-weight:750;color:#5f6b86}.date-control input{width:167px;background:#fff}
+  .scroll{overflow:auto;border:1px solid #edf0fa;border-radius:14px}
+  table{width:100%;border-collapse:collapse;min-width:610px}
+  th,td{text-align:left;padding:13px 15px;border-bottom:1px solid #edf0fa;font-size:13px}
+  th{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.45px;background:#f5f3ff;color:#64548a;position:sticky;top:0}
+  tbody tr:nth-child(even){background:#fafbff}tbody tr:hover{background:#f4f7ff}tbody tr:last-child td{border-bottom:0}
+  .pill{display:inline-block;border-radius:30px;background:#d7fbe8;color:#007b53;padding:5px 10px;font-size:11px;font-weight:850}
+  .pill.absent{background:#fff0eb;color:#c55e45}
+  .empty{padding:20px 14px;color:#8190a8;text-align:center}
+  .footer{text-align:center;padding:2px 5px 0}
+  .chip{font-size:11px;border-radius:100px;padding:7px 11px;background:#f4ecff;color:#6550a5;font-weight:750}
+  @media(max-width:850px){.settings{grid-template-columns:1fr 1fr}.settings .field:first-child{grid-column:1/-1}}
+  @media(max-width:720px){header{padding:28px 0 76px}.hero{gap:12px}.brandmark{width:48px;height:48px;border-radius:14px}h1{font-size:20px}.grid{grid-template-columns:1fr;gap:11px}.stat{padding:18px 20px}.stat strong{font-size:35px}.stat .symbol{margin-bottom:7px}.panel{padding:18px;border-radius:18px}.settings{grid-template-columns:1fr}.settings .field:first-child{grid-column:auto}.device-tag{margin-left:0}.date-control input{width:145px}.sectionhead{align-items:flex-start}.actions{gap:8px}}
+
+  .enroll-panel{border-top:5px solid #29b6d1}
+  .form-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+  .form-grid label{display:block;color:#596780;font-size:12px;font-weight:750;margin-bottom:6px}
+  .scan-result{background:linear-gradient(105deg,#f0eafd,#e8f9ff);border:1px solid #e1dafa;color:#433c82;padding:14px;border-radius:13px;margin:14px 0;font-weight:700}
+  .response{min-height:26px;font-size:13px;font-weight:750;color:#6850ad}
+  button.green{background:linear-gradient(105deg,#019977,#39c2a5)}
+  button.danger{background:linear-gradient(105deg,#e45c69,#f28b56)}
+  button.compact{padding:7px 10px;font-size:12px}
+  @media(max-width:750px){.form-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header><div class="wrap hero"><div class="brandmark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V8l7-5 7 5v13M9 21v-6h6v6M8 11h.01M16 11h.01"/></svg></div><div><div class="eyebrow">Smart campus · live monitoring</div><h1>JAIGOPAL GARODIA GOVT GIRLS HSS</h1><p>RFID Attendance Portal &nbsp;•&nbsp; Cloud attendance & registration via EMQX MQTT</p></div></div></header>
+<main class="wrap">
+  <section class="panel connect-panel">
+    <div class="sectionhead"><h2>Cloud MQTT connection</h2><span id="status" role="status" aria-live="polite" class="status">Not connected</span></div>
+    <div class="settings">
+      <div class="field"><label for="broker">Broker WebSocket URL (WSS)</label><input id="broker" value="wss://n0e2dddf.ala.us-east-1.emqxsl.com:8084/mqtt" spellcheck="false"></div>
+      <div class="field"><label for="user">MQTT username</label><input id="user" value="school" autocomplete="off" spellcheck="false"></div>
+      <div class="field"><label for="pass">MQTT password</label><input id="pass" type="password" value="school123" autocomplete="off"></div>
+    </div>
+    <div class="actions"><button id="connect" type="button">Connect to MQTT</button><button id="disconnect" class="secondary" type="button" disabled>Disconnect</button><span id="device" class="device-tag">ESP32: waiting</span></div>
+    <p class="hint">Requires internet. The browser verifies TLS certificates automatically; no certificate upload is needed. For this demo, the password is prefilled as requested. <strong>Do not publish this HTML publicly with a real password in it.</strong> Dashboard Client ID: <code>school_dashboard</code>. It needs publish access to <code>school/cmd/#</code> and subscribe access to <code>school/#</code>.</p>
+  </section>
+
+  <div class="grid">
+    <div class="stat"><div class="symbol" aria-hidden="true">◎</div><small>Registered students</small><strong id="total">0</strong><span class="micro">Student database</span></div>
+    <div class="stat"><div class="symbol" aria-hidden="true">✓</div><small>Present</small><strong id="present">0</strong><span class="micro">Recorded attendance</span></div>
+    <div class="stat"><div class="symbol" aria-hidden="true">—</div><small>Absent</small><strong id="absent">0</strong><span class="micro">Not yet marked</span></div>
+  </div>
+
+  <section class="panel">
+    <div class="sectionhead"><h2>Attendance register</h2><div class="date-control"><label for="day">Date (IST)</label><input type="date" id="day"><button type="button" id="csv" class="secondary">Export CSV</button></div></div>
+    <div class="attendance-summary"><span>Daily attendance progress</span><span id="percent">0% marked</span></div>
+    <div class="track" role="presentation"><div id="progressFill" class="fill"></div></div>
+    <div class="scroll"><table><thead><tr><th>Time</th><th>Student</th><th>Class</th><th>Roll No.</th><th>Card UID</th><th>Status</th></tr></thead><tbody id="attendance"><tr><td colspan="6" class="empty">Connect to MQTT to load records</td></tr></tbody></table></div>
+  </section>
+  <section class="panel enroll-panel">
+    <div class="sectionhead"><h2>Register an RFID student (MQTT)</h2><span class="chip">Remote administration</span></div>
+    <p class="hint">Enter student details, click <strong>Start RFID Scan</strong>, then tap the card on the ESP32 reader. Save after its UID appears below. The ESP32 must be online.</p>
+    <div class="form-grid">
+      <div><label for="studentName">Student name</label><input id="studentName" maxlength="60" placeholder="Full name"></div>
+      <div><label for="studentClass">Class / section</label><input id="studentClass" maxlength="60" placeholder="Example: XII-A"></div>
+      <div><label for="studentRoll">Roll number</label><input id="studentRoll" maxlength="60" placeholder="Roll number"></div>
+    </div>
+    <div id="scanState" class="scan-result" role="status">Card UID: not scanned</div>
+    <div class="actions"><button id="startScan" type="button">Start RFID Scan</button><button id="saveStudent" type="button" class="green">Save Student</button><button id="syncTime" type="button" class="secondary">Sync ESP32 Time</button><button id="resync" type="button" class="secondary">Sync Saved Data</button></div>
+    <p id="reply" class="response" aria-live="polite"></p>
+  </section>
+  <section class="panel"><div class="sectionhead"><h2>Registered students</h2><span class="chip">RFID profiles</span></div><div class="scroll"><table><thead><tr><th>Card UID</th><th>Student name</th><th>Class</th><th>Roll No.</th><th>Selected-day status</th><th>Manage</th></tr></thead><tbody id="students"><tr><td colspan="6" class="empty">No cloud records loaded</td></tr></tbody></table></div></section>
+  <p class="footnote footer">No ESP32 hotspot or local web is used. Student enrollment and management run through MQTT. Cloud topics: <code>school/#</code>. For demonstrations only; secure the system before using real student information.</p>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mqtt/5.16.0/mqtt.min.js"></script>
+<script>
+'use strict';
+const $=id=>document.getElementById(id);
+const registered=new Map(),records=new Map();
+let mqttClient=null;
+let scannedUID="";
+let readyToManage=false;
+
+function indiaDate() {
+  const pieces=new Intl.DateTimeFormat('en-US',{timeZone:'Asia/Kolkata',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date());
+  const o={}; for(const p of pieces) o[p.type]=p.value;
+  return `${o.year}-${o.month}-${o.day}`;
+}
+$('day').value=indiaDate();
+
+function setStatus(message,ok=false){$('status').textContent=message;$('status').classList.toggle('ok',ok)}
+function cell(tr,value){let td=document.createElement('td');td.textContent=String(value??'');tr.appendChild(td);return td}
+function emptyRow(tbody,cols,message){const tr=document.createElement('tr'),td=cell(tr,message);td.colSpan=cols;td.className='empty';tbody.appendChild(tr)}
+
+function selectedRecords(){
+  const d=$('day').value;
+  return [...records.values()].filter(r=>r.date===d&&registered.has(r.uid)).sort((a,b)=>a.time.localeCompare(b.time));
+}
+function redraw(){
+  const arr=selectedRecords();const presentUID=new Set(arr.map(x=>x.uid));
+  $('total').textContent=registered.size;
+  $('present').textContent=presentUID.size;
+  $('absent').textContent=Math.max(0,registered.size-presentUID.size);
+  const pct=registered.size?Math.round(presentUID.size*100/registered.size):0;
+  $('percent').textContent=pct+'% marked';
+  $('progressFill').style.width=pct+'%';
+
+  const at=$('attendance');at.replaceChildren();
+  if(!arr.length)emptyRow(at,6,'No attendance for this date yet');
+  for(const r of arr){const tr=document.createElement('tr');
+    cell(tr,r.time);cell(tr,r.name);cell(tr,r.class);cell(tr,r.roll);cell(tr,r.uid);
+    let td=document.createElement('td');td.innerHTML='<span class="pill">PRESENT</span>';tr.appendChild(td);at.appendChild(tr);
+  }
+  const st=$('students');st.replaceChildren();
+  if(!registered.size)emptyRow(st,6,'No registered students received');
+  for(const s of [...registered.values()].sort((a,b)=>a.name.localeCompare(b.name))){
+    const tr=document.createElement('tr');cell(tr,s.uid);cell(tr,s.name);cell(tr,s.class);cell(tr,s.roll);
+    const td=document.createElement('td');const badge=document.createElement('span');badge.className='pill'+(presentUID.has(s.uid)?'':' absent');badge.textContent=presentUID.has(s.uid)?'PRESENT':'ABSENT';td.appendChild(badge);tr.appendChild(td);
+    const manage=document.createElement('td');const del=document.createElement('button');
+    del.textContent='Delete';del.className='danger compact';
+    del.onclick=()=>deleteCloudStudent(s.uid,s.name);
+    manage.appendChild(del);tr.appendChild(manage);st.appendChild(tr);
+  }
+}
+
+function publishCommand(path,body){
+  if(!mqttClient || !mqttClient.connected){$('reply').textContent='Connect to MQTT first.';return false}
+  mqttClient.publish('school/cmd/'+path,String(body),{qos:1},err=>{
+    if(err)$('reply').textContent='Command not delivered: '+err.message;
+  });
+  return true;
+}
+function updateEnroll(state){
+  if(state && typeof state.uid==='string')scannedUID=state.uid;
+  $('scanState').textContent=scannedUID ? 'Card scanned: '+scannedUID : (state && state.waiting ? 'Waiting for RFID card to be scanned on the ESP32...' : 'Card UID: not scanned');
+}
+function startCloudScan(){
+  scannedUID='';updateEnroll({waiting:true,uid:''});
+  if(publishCommand('enroll/start','start')) $('reply').textContent='Scan the physical RFID card on the ESP32.';
+}
+function saveCloudStudent(){
+  const name=$('studentName').value.trim(),cls=$('studentClass').value.trim(),roll=$('studentRoll').value.trim();
+  if(!scannedUID){$('reply').textContent='First click Start RFID Scan and scan a card.';return}
+  if(!name||!cls||!roll){$('reply').textContent='Fill in name, class and roll number.';return}
+  if([name,cls,roll].some(v=>v.includes('|')||v.includes('\n')||v.includes('\r'))){$('reply').textContent='Characters | and newlines are not allowed.';return}
+  if(publishCommand('student/add',[scannedUID,name,cls,roll].join('|'))){
+    $('reply').textContent='Sent registration request to ESP32...';
+  }
+}
+function deleteCloudStudent(uid,name){
+  if(!confirm('Delete '+name+' from the ESP32 student database?'))return;
+  if(publishCommand('student/delete',uid)) $('reply').textContent='Sent delete request for '+name;
+}
+function syncEspTime(){
+  if(publishCommand('time',Math.floor(Date.now()/1000))) $('reply').textContent='Sending browser time to ESP32...';
+}
+function onMqttMessage(topic,payload){
+  if(topic==='school/reply'){
+    try {const x=JSON.parse(payload.toString());$('reply').textContent=(x.ok?'Success: ':'Error: ')+x.message;
+      if(x.ok && x.message.startsWith('Student registered:')){
+        scannedUID='';updateEnroll({waiting:false,uid:''});
+        $('studentName').value='';$('studentClass').value='';$('studentRoll').value='';
+      }
+    }catch(e){}return;
+  }
+  if(topic==='school/enroll/state'){
+    if(payload.length)try{updateEnroll(JSON.parse(payload.toString()))}catch(e){}
+    return;
+  }
+
+  if(topic==='school/status'){
+    if(payload.length){try{const x=JSON.parse(payload.toString());$('device').textContent='ESP32: '+(x.online?'Online':'Offline')+(x.clockReady===false?' · Clock not set':'');}catch(e){}}
+    return;
+  }
+  if(topic.startsWith('school/students/')){
+    const uid=topic.substring('school/students/'.length);
+    if(!payload.length){registered.delete(uid)}
+    else {try{const x=JSON.parse(payload.toString());if(x.uid===uid&&typeof x.name==='string')registered.set(uid,x)}catch(e){}}
+    redraw();return;
+  }
+  if(topic.startsWith('school/attendance/')){
+    const key=topic.substring('school/attendance/'.length);
+    if(!payload.length){records.delete(key)}
+    else {try{const x=JSON.parse(payload.toString());if(x.uid&&x.date&&x.time)records.set(key,x)}catch(e){}}
+    redraw();
+  }
+}
+
+function connectCloud(){
+  if(typeof mqtt==='undefined'){setStatus('MQTT.js failed to load. Check internet/CDN access.');return}
+  if(mqttClient){try{mqttClient.end(true)}catch(e){}mqttClient=null}
+  const url=$('broker').value.trim();
+  if(!url.startsWith('wss://')||!url.endsWith('/mqtt')){setStatus('Use a wss:// URL ending in /mqtt');return}
+  const username=$('user').value.trim(),password=$('pass').value;
+  if(!username||!password){setStatus('Enter the MQTT username and password');return}
+  registered.clear();records.clear();redraw();scannedUID='';updateEnroll({waiting:false,uid:''});$('device').textContent='ESP32: waiting';
+  setStatus('Connecting...');$('connect').disabled=true;$('disconnect').disabled=false;
+  const client=mqtt.connect(url,{
+    clientId:'school_dashboard',username,password,
+    clean:true,reconnectPeriod:4500,connectTimeout:10000,keepalive:45,
+    protocolVersion:4
+  });
+  mqttClient=client;
+  client.on('connect',()=>{
+    if(mqttClient!==client)return;
+    setStatus('Cloud MQTT connected',true);
+    // Must be granted SUBSCRIBE access to school/# for client ID school_dashboard.
+    client.subscribe(['school/#'],{qos:0},err=>{
+      if(err)setStatus('Connected, but subscription failed: '+err.message);
+    });
+  });
+  client.on('message',onMqttMessage);
+  client.on('reconnect',()=>{if(mqttClient===client)setStatus('Reconnecting...')});
+  client.on('close',()=>{if(mqttClient===client)setStatus('Disconnected. Retrying...')});
+  client.on('error',err=>{if(mqttClient===client)setStatus('MQTT: '+err.message)});
+}
+function disconnectCloud(){
+  if(mqttClient){mqttClient.end(true);mqttClient=null}
+  $('connect').disabled=false;$('disconnect').disabled=true;setStatus('Disconnected');$('device').textContent='ESP32: waiting';
+}
+function csvCell(v){
+  let s=String(v??'');if(/^[=+\-@]/.test(s))s="'"+s;
+  return '"'+s.replace(/"/g,'""')+'"';
+}
+function exportCsv(){
+  const rows=[['Date','Time','UID','Student Name','Class','Roll No.']];
+  for(const r of selectedRecords())rows.push([r.date,r.time,r.uid,r.name,r.class,r.roll]);
+  const file=new Blob(['\ufeff'+rows.map(r=>r.map(csvCell).join(',')).join('\r\n')],{type:'text/csv;charset=utf-8'});
+  const url=URL.createObjectURL(file);const a=document.createElement('a');a.href=url;a.download='attendance_'+$('day').value+'.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+$('connect').addEventListener('click',connectCloud);
+$('disconnect').addEventListener('click',disconnectCloud);
+$('day').addEventListener('change',redraw);
+$('csv').addEventListener('click',exportCsv);
+$('startScan').addEventListener('click',startCloudScan);
+$('saveStudent').addEventListener('click',saveCloudStudent);
+$('syncTime').addEventListener('click',syncEspTime);
+$('resync').addEventListener('click',()=>{if(publishCommand('sync','now'))$('reply').textContent='Resync requested';});
+redraw();
+</script>
+</body>
+</html>
